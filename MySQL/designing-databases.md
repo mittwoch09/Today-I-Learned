@@ -103,3 +103,97 @@ A column in a table should not be **derived** from other columns.
 | SeJun | Jang |Sejun Jang  |
 
 We can always calculate it by combining the first and last names.
+
+#### 12. Creating and Dropping Databases
+
+```sql
+CREATE DATABASE IF NOT EXISTS sql_store2;
+```
+
+```sql
+DROP DATABASE IF EXISTS sql_store2;
+```
+
+##### 13. Creating Tables
+
+```sql
+DROP TABLE IF EXISTS customers;
+CREATE TABLE IF NOT EXISTS customers
+(
+  customer_id INT PRIMARY KEY AUTO_INCREMENT,
+  first_name VARCHAR(50) NOT NULL,
+  points INT NOT NULL DEFAULT 0,
+  email VARCHAR(50) NOT NULL UNIQUE
+);
+```
+
+#### 14. Altering Tables
+
+```sql
+ALTER TABLE customers
+  ADD last_name VARCHAR(50) NOT NULL AFTER first_name
+  ADD city VARCHAR(50) NOT NULL,
+  MODIFY COLUMN first_name VARCHAR(55) DEFALUT ''
+  DROP points;
+```
+
+#### 15. Creating Relationships
+
+```sql
+DROP TABLE IF EXISTS orders;
+CREATE TABLE orders
+(
+  order_id INT PRIMARY KEY,
+  customer_id INT NOT NULL,
+  FOREIGN KEY fk_orders_customers (customer_id) 
+    REFERENCE customers (customer_id)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION
+ );
+ ```
+
+#### 16. Altering Primary and Foreign Key Constraints
+
+```sql
+ALTER TABLE orders
+  ADD PRIMARY KEY (order_id),
+  DROP PRIMARY KEY,
+  DROP FOREIGN KEY fk_orders_customers,
+  ADD FOREIGN KEY fk_orders_customers (customer_id)
+    REFERENCE customers (customer_id)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION;
+```
+
+#### 17. Character Sets and Collations
+
+<img width="851" alt="Screen Shot 2022-04-07 at 4 40 56 PM" src="https://user-images.githubusercontent.com/73784742/162158310-851f4c14-3b99-4176-bc12-928eb728df60.png">
+
+---
+
+```sql
+CREATE DATABASE db_name
+  CHARACTER SET latin1
+```
+
+```sql
+DROP TABLE IF EXISTS customers;
+CREATE TABLE IF NOT EXISTS customers
+(
+  customer_id INT PRIMARY KEY AUTO_INCREMENT,
+  first_name VARCHAR(50) CHARACTER SET latin1 NOT NULL,
+  points INT NOT NULL DEFAULT 0,
+  email VARCHAR(50) NOT NULL UNIQUE
+);
+```
+
+#### 18. Storage Engines
+
+<img width="853" alt="Screen Shot 2022-04-07 at 4 44 37 PM" src="https://user-images.githubusercontent.com/73784742/162159073-7e3b2362-8745-413c-ad29-0b6126e7729f.png">
+
+---
+
+```sql
+ALTER TABLE customers
+ENGINE = InnoDB
+```
