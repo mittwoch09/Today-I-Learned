@@ -4,7 +4,7 @@
 > 
 > -- by Haruki Murakami
 
-_15 TILs and counting..._
+_29 TILs and counting..._
 
 This is a collection of short articles about things I've learned. Inspired by [simonw](https://github.com/simonw/til)
 
@@ -30,3 +30,19 @@ This is a collection of short articles about things I've learned. Inspired by [s
 - [Debugging](Excel_VBA/debugging.md) - 2022.03.30
 - [Creating Macros from Scratch](Excel_VBA/creating-macros-from-scratch.md) - 2022.04.03
 - [Insert and Format Text](Excel_VBA/insert-and-format-text.md) - 2022.04.03
+- [Simple Varibles](Excel_VBA/simple-variable.md) - 2022.04.12
+- [For Next Loop](Excel_VBA/for-next-loop.md) - 2022.04.12
+- [Do Loop](Excel_VBA/do-loop.md) - 2022.04.12
+- [Worksheets, Count, Offset, Copy](Excel_VBA/worksheets-count-offset-copy.md) - 2022.04.12
+- [Address, Call, End](Excel_VBA/address-call-end.md) - 2022.04.12
+- [Report Generator](Excel_VBA/report-generator.md) - 2022.04.12
+- [FIND Macros](Excel_VBA/find-macros.md) - 2022.04.13
+- [Input Boxes for Sorting](Excel_VBA/input-boxes-for-sorting.md) - 2022.04.13
+- [DataSerial and Format](Excel_VBA/dataserial-and-format.md) - 2022.04.13
+- [Sheet Template Generator and Reordering Sheets](Excel_VBA/sheet-template-generator-and-reordering-sheets.md) - 2022.04.13
+- [Move, Copy and Print based on User Input](Excel_VBA/move-copy-and-print-based-on-user-input.md) - 2022.04.13
+- [User Defined Functions](Excel_VBA/user-defined-functions.md) - 2022.04.13
+
+### Vim
+
+- [Markdown Preview](Vim/markdown-preview.md) 
