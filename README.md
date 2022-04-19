@@ -4,7 +4,7 @@
 > 
 > -- by Haruki Murakami
 
-_29 TILs and counting..._
+_30 TILs and counting..._
 
 This is a collection of short articles about things I've learned. Inspired by [simonw](https://github.com/simonw/til)
 
@@ -43,7 +43,7 @@ This is a collection of short articles about things I've learned. Inspired by [s
 - [Move, Copy and Print based on User Input](Excel_VBA/move-copy-and-print-based-on-user-input.md) - 2022.04.13
 - [User Defined Functions](Excel_VBA/user-defined-functions.md) - 2022.04.13
 
-### SQL fot Data Analysis
+### SQL for Data Analysis
 
 - [Time Series Analysis](DataAnalysis/TimeSeriesAnalysis/time-series-analysis.ipynb) - 2022.04.19
 
