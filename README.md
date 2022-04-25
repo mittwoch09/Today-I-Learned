@@ -4,7 +4,7 @@
 > 
 > -- by Haruki Murakami
 
-_30 TILs and counting..._
+_31 TILs and counting..._
 
 This is a collection of short articles about things I've learned. Inspired by [simonw](https://github.com/simonw/til)
 
@@ -28,7 +28,8 @@ This is a collection of short articles about things I've learned. Inspired by [s
 
 - [Time Series Analysis](DataAnalysis/TimeSeriesAnalysis/time-series-analysis.ipynb) - 2022.04.19
 - [Cohort Analysis](DataAnalysis/CohortAnalysis/cohort-analysis.ipynb) - 2022.04.22
-
+- [Anomaly Detection](DataAalysis/AnomalyDetection/anomaly-detection.ipynb) - 2022.04.25
+-
 ### BiqQuery
 
 - [BiqQuery Analysis](BigQuery/google-analytics-data.ipynb) - 2022.04.17
