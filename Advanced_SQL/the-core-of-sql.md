@@ -24,6 +24,39 @@ INSERT INTO T VALUES
 |4|y|false|20|
 |5|x|true |  |
 
+---
+
+```sql
+DROP TABLE IF EXISTS prehistoric;
+CREATE TABLE prehistoric (class        text,
+                          "herbivore?" boolean,
+                          legs         int,
+                          species      text);
+
+INSERT INTO prehistoric VALUES
+  ('mammalia',  true, 2, 'Megatherium'),
+  ('mammalia',  true, 4, 'Paraceratherium'),
+  ('mammalia', false, 2, NULL),
+  ('mammalia', false, 4, 'Sabretooth'),
+  ('reptilia',  true, 2, 'Iguanodon'),
+  ('reptilia',  true, 4, 'Brachiosaurus'),
+  ('reptilia', false, 2, 'Velociraptor'),
+  ('reptilia', false, 4, NULL);
+  
+ TABLE prehistoric;
+ ```
+
+|class   |herbivore?|legs|species        |
+|--------|----------|----|---------------|
+|mammalia|true      |   2|Megatherium    |
+|mammalia|true      |   4|Paraceratherium|
+|mammalia|false     |   2|               |
+|mammalia|false     |   4|Sabretooth     |
+|reptilia|true      |   2|Iguanodon      |
+|reptilia|true      |   4|Brachiosaurus  |
+|reptilia|false     |   2|Velociraptor   |
+|reptilia|false     |   4|               |
+
 ### DISTINCT ON
 
 <img width="500" alt="Screen Shot 2022-05-09 at 4 22 02 PM" src="https://user-images.githubusercontent.com/73784742/167369660-973f9248-5890-4bf4-8a47-f4a0f53ca5ea.png">
@@ -109,3 +142,305 @@ FROM   T as t;
 |distinct non-NULL|#non-NULL|
 |------------------|---------|
 |                 2|        5|
+
+### GROUP BY
+
+<img width="500" alt="Screen Shot 2022-05-10 at 2 57 37 PM" src="https://user-images.githubusercontent.com/73784742/167567149-5e040ccd-9d83-4256-b7a8-1067619ad967.png">
+
+```sql
+SELECT t.b                           AS "group",
+       COUNT(*)                      AS size,
+       SUM(t.d)                      AS "∑d",
+       bool_and(t.a % 2 = 0)         AS "∀even(a)",
+       string_agg(t.a :: text, ';')  AS "all a"
+FROM   T AS t
+GROUP BY t.b;
+```
+
+|group|size|∑d|∀even(a)|all a|
+|-----|----|--|--------|-----|
+|y    |   2|60|true    |2;4  |
+|x    |   3|40|false   |1;3;5|
+
+HAVING p acts like WHERE but after grouping: p = false discards groups (not rows).
+
+```sql
+SELECT t.b                           AS "group",
+       COUNT(*)                      AS size,
+       SUM(t.d)                      AS "∑d",
+       bool_and(t.a % 2 = 0)         AS "∀even(a)",
+       string_agg(t.a :: text, ';')  AS "all a"
+FROM   T AS t
+GROUP BY t.b
+HAVING COUNT(*) > 2;
+```
+
+|group|size|∑d|∀even(a)|all a|
+|-----|----|--|--------|-----|
+|x    |   3|40|false   |1;3;5|
+
+```sql
+SELECT t.a % 2 AS "a odd?",
+       COUNT(*) AS size
+FROM   T AS t
+GROUP BY t.a % 2;
+```
+
+|a odd?|size|
+|------|----|
+|     0|   2|
+|     1|   3|
+
+⚠️ t.a is **not** constant in each group (but t.a % 2 is)
+
+```sql
+SELECT t.b AS "group",
+       t.a % 2 AS "a odd?" -- constant in the 'x'/'y' groups, but PostgreSQL doesn't know...
+FROM   T AS t
+GROUP BY t.b, t.a % 2;
+```
+
+|group|a odd?|
+|-----|------|
+|y    |     0|
+|x    |     1|
+
+• if t.b = 'x', then t.a is odd  ⇒ x | 1;3;5
+• if t.b = 'y', then t.a is even ⇒ y | 2;4
+
+functionally dependent on t.b ⇒ will not affect grouping, list here explicitly as grouping criterion, so we may use it in the SELECT clause
+
+### Bag and Set Operations
+
+<img width="500" alt="Screen Shot 2022-05-10 at 3 55 49 PM" src="https://user-images.githubusercontent.com/73784742/167578101-87bcb7e5-7664-4a0b-8249-215ac2d1df01.png">
+
+For all bag/set operations, the Left/Right argument tables need to contribute compatible rows:
+ • row widths must match
+ • field types in corresponding columns must be cast-compatible
+ • the row type of the Left argument determines the result's field types and names
+
+ ```sql
+SELECT t.*
+FROM   T AS t
+WHERE  t.c
+  UNION ALL
+SELECT t.*
+FROM   T AS t
+WHERE  NOT t.c;
+```
+
+|a|b|c    |d |
+|-|-|-----|--|
+|1|x|true |10|
+|2|y|true |40|
+|5|x|true |  |
+|3|x|false|30|
+|4|y|false|20|
+
+```sql
+SELECT t.b
+FROM   T AS t
+WHERE  t.c
+  UNION ALL -- <-> UNION (queries contribute duplicate rows)
+SELECT t.b
+FROM   T AS t
+WHERE  NOT t.c;
+```
+
+|b|
+|-|
+|x|
+|y|
+|x|
+|x|
+|y|
+
+```sql
+SELECT '1' AS q, t.b
+FROM   T AS t
+WHERE  t.c
+  UNION ALL
+SELECT '2' AS q, t.b
+FROM   T AS t
+WHERE  NOT t.c;
+```
+
+|q|b|
+|-|-|
+|1|x|
+|1|y|
+|1|x|
+|2|x|
+|2|y|
+
+```sql
+SELECT t.b        -- ⎫
+FROM   T AS t     -- ⎬  q₁ contributes 2 × 'x', 1 × 'y'
+WHERE  t.c        -- ⎭
+  EXCEPT ALL
+SELECT t.b        -- ⎫
+FROM   T AS t     -- ⎬  q₂ contributes 1 × 'x', 1 × 'y'
+WHERE  NOT t.c;   -- ⎭
+```
+
+|b|
+|-|
+| |
+
+```sql
+SELECT t.b        -- ⎫
+FROM   T AS t     -- ⎬  q₂ contributes 1 × 'x', 1 × 'y'
+WHERE  NOT t.c    -- ⎭
+  EXCEPT ALL
+SELECT t.b        -- ⎫
+FROM   T AS t     -- ⎬  q₁ contributes 2 × 'x', 1 × 'y'
+WHERE  t.c;       -- ⎭
+```
+
+|b|
+|-|
+| |
+
+### GROUP BYs: GROUPING SETS
+
+<img width="500" alt="Screen Shot 2022-05-10 at 5 12 36 PM" src="https://user-images.githubusercontent.com/73784742/167593598-e3d8d33f-366e-487a-97ee-3dc825d8c00f.png">
+
+```sql
+SELECT p.class,
+       p."herbivore?",
+       p.legs,
+       string_agg(p.species, ', ') AS species  -- string_agg ignores NULL (may use COALESCE(p.species, '?'))
+FROM   prehistoric AS p
+GROUP BY GROUPING SETS ((class), ("herbivore?"), (legs));
+```
+
+|class   |herbivore?|legs|species                                               |
+|--------|----------|----|------------------------------------------------------|
+|reptilia|          |    |Iguanodon, Brachiosaurus, Velociraptor                |
+|mammalia|          |    |Megatherium, Paraceratherium, Sabretooth              |
+|        |false     |    |Sabretooth, Velociraptor                              |
+|        |true      |    |Megatherium, Paraceratherium, Iguanodon, Brachiosaurus|
+|        |          |   4|Paraceratherium, Sabretooth, Brachiosaurus            |
+|        |          |   2|Megatherium, Iguanodon, Velociraptor                  |
+
+
+Equivalent to GROUPING SETS ((class), ("herbivore?"), (legs))
+
+```sql
+SELECT p.class,
+       NULL :: boolean             AS "herbivore?", -- ⎱  NULL is polymorphic ⇒ PostgreSQL
+       NULL :: int                 AS legs,         -- ⎰  will default to type text
+       string_agg(p.species, ', ') AS species
+FROM   prehistoric AS p
+GROUP BY p.class
+
+  UNION ALL
+
+SELECT NULL :: text                AS class,
+       p."herbivore?",
+       NULL :: int                 AS legs,
+       string_agg(p.species, ',' ) AS species
+FROM   prehistoric AS p
+GROUP BY p."herbivore?"
+
+  UNION ALL
+
+SELECT NULL :: text                AS class,
+       NULL :: boolean             AS "herbivore?",
+       p.legs AS legs,
+       string_agg(p.species, ', ') AS species
+FROM   prehistoric AS p
+GROUP BY p.legs;
+```
+
+### ROLLUP
+
+<img width="500" alt="Screen Shot 2022-05-10 at 5 20 45 PM" src="https://user-images.githubusercontent.com/73784742/167595226-f316c0b3-fb59-490b-abd8-61b77f8dd63c.png">
+
+```sql
+SELECT p.class,
+       p."herbivore?",
+       p.legs,
+       string_agg(p.species, ', ') AS species
+FROM   prehistoric AS p
+GROUP BY ROLLUP (class, "herbivore?", legs);
+-- optional: "visualize" hierarchy (least specific last)
+-- ORDER BY (class IS NULL) :: int + ("herbivore?" IS NULL) :: int + (legs IS NULL) :: int, class, "herbivore?", legs
+```
+
+|class   |herbivore?|legs|species                                                                         |
+|--------|----------|----|--------------------------------------------------------------------------------|
+|mammalia|false     |   2|                                                                                |
+|mammalia|false     |   4|Sabretooth                                                                      |
+|mammalia|true      |   2|Megatherium                                                                     |
+|mammalia|true      |   4|Paraceratherium                                                                 |
+|reptilia|false     |   2|Velociraptor                                                                    |
+|reptilia|false     |   4|                                                                                |
+|reptilia|true      |   2|Iguanodon                                                                       |
+|reptilia|true      |   4|Brachiosaurus                                                                   |
+|mammalia|false     |    |Sabretooth                                                                      |
+|mammalia|true      |    |Megatherium, Paraceratherium                                                    |
+|reptilia|false     |    |Velociraptor                                                                    |
+|reptilia|true      |    |Iguanodon, Brachiosaurus                                                        |
+|mammalia|          |    |Sabretooth, Megatherium, Paraceratherium                                        |
+|reptilia|          |    |Velociraptor, Iguanodon, Brachiosaurus                                          |
+|        |          |    |Sabretooth, Megatherium, Paraceratherium, Velociraptor, Iguanodon, Brachiosaurus|
+
+<img width="500" alt="Screen Shot 2022-05-10 at 5 31 04 PM" src="https://user-images.githubusercontent.com/73784742/167597320-c64c749f-4c0e-466c-9651-b1216648c800.png">
+
+```sql
+SELECT string_agg(p.species, ', ') AS species
+FROM   prehistoric AS p
+GROUP BY ();
+```
+
+|species                                                                         |
+|--------------------------------------------------------------------------------|
+|Megatherium, Paraceratherium, Sabretooth, Iguanodon, Brachiosaurus, Velociraptor|
+
+With the empty set ∅ ≡ () of grouping criteria, all rows form a **single** large group:
+
+### CUBE
+
+<img width="500" alt="Screen Shot 2022-05-10 at 5 38 57 PM" src="https://user-images.githubusercontent.com/73784742/167598983-62c5ceeb-eed7-473e-bc20-b95de7d1a52e.png">
+
+```sql
+SELECT p.class,
+       p."herbivore?",
+       p.legs,
+       string_agg(p.species, ', ') AS species
+FROM   prehistoric AS p
+GROUP BY CUBE (class, "herbivore?", legs);
+```
+
+|class   |herbivore?|legs|species                                                                         |
+|--------|----------|----|--------------------------------------------------------------------------------|
+|mammalia|false     |   2|                                                                                |
+|mammalia|false     |   4|Sabretooth                                                                      |
+|mammalia|true      |   2|Megatherium                                                                     |
+|mammalia|true      |   4|Paraceratherium                                                                 |
+|reptilia|false     |   2|Velociraptor                                                                    |
+|reptilia|false     |   4|                                                                                |
+|reptilia|true      |   2|Iguanodon                                                                       |
+|reptilia|true      |   4|Brachiosaurus                                                                   |
+|mammalia|false     |    |Sabretooth                                                                      |
+|mammalia|true      |    |Megatherium, Paraceratherium                                                    |
+|mammalia|          |   2|Megatherium                                                                     |
+|mammalia|          |   4|Sabretooth, Paraceratherium                                                     |
+|reptilia|false     |    |Velociraptor                                                                    |
+|reptilia|true      |    |Iguanodon, Brachiosaurus                                                        |
+|reptilia|          |   2|Velociraptor, Iguanodon                                                         |
+|reptilia|          |   4|Brachiosaurus                                                                   |
+|        |false     |   2|Velociraptor                                                                    |
+|        |false     |   4|Sabretooth                                                                      |
+|        |true      |   2|Megatherium, Iguanodon                                                          |
+|        |true      |   4|Paraceratherium, Brachiosaurus                                                  |
+|mammalia|          |    |Sabretooth, Megatherium, Paraceratherium                                        |
+|reptilia|          |    |Velociraptor, Iguanodon, Brachiosaurus                                          |
+|        |false     |    |Velociraptor, Sabretooth                                                        |
+|        |true      |    |Megatherium, Iguanodon, Paraceratherium, Brachiosaurus                          |
+|        |          |   2|Megatherium, Velociraptor, Iguanodon                                            |
+|        |          |   4|Sabretooth, Paraceratherium, Brachiosaurus                                      |
+|        |          |    |Sabretooth, Megatherium, Paraceratherium, Velociraptor, Iguanodon, Brachiosaurus|
+
+<img width="500" alt="Screen Shot 2022-05-10 at 5 43 21 PM" src="https://user-images.githubusercontent.com/73784742/167599882-b7c9b133-4eeb-451d-ab3b-158b75d3adcc.png">
