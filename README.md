@@ -4,11 +4,20 @@
 > 
 > -- by Haruki Murakami
 
-_32 TILs and counting..._
+_33 TILs and counting..._
 
 This is a collection of short articles about things I've learned. Inspired by [simonw](https://github.com/simonw/til)
 
 ---
+### Advanced_SQL
+
+- [The Core of SQL](Advanced_SQL/the-core-of-sql.md) - 2022.05.10
+
+### SQL for Data Analysis
+
+- [Time Series Analysis](DataAnalysis/TimeSeriesAnalysis/time-series-analysis.ipynb) - 2022.04.19
+- [Cohort Analysis](DataAnalysis/CohortAnalysis/cohort-analysis.ipynb) - 2022.04.22
+- [Anomaly Detection](DataAnalysis/AnomalyDetection/anomaly-detection.ipynb) - 2022.04.25
 
 ### MySQL
 
@@ -23,12 +32,6 @@ This is a collection of short articles about things I've learned. Inspired by [s
 - [Transactions and Concurrency](MySQL/transactions-and-concurrency.md) - 2022.04.05
 - [Data Types](MySQL/data-types.md) - 2022.04.06
 - [Designing Databases](MySQL/designing-databases.md) - 2022.04.07
-
-### SQL for Data Analysis
-
-- [Time Series Analysis](DataAnalysis/TimeSeriesAnalysis/time-series-analysis.ipynb) - 2022.04.19
-- [Cohort Analysis](DataAnalysis/CohortAnalysis/cohort-analysis.ipynb) - 2022.04.22
-- [Anomaly Detection](DataAnalysis/AnomalyDetection/anomaly-detection.ipynb) - 2022.04.25
 
 ### BiqQuery
 
