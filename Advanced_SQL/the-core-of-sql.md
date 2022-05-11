@@ -478,3 +478,85 @@ LIMIT  7;
 <img width="500" alt="Screen Shot 2022-05-11 at 12 04 11 PM" src="https://user-images.githubusercontent.com/73784742/167766899-d0b1058a-eba0-4d88-b48b-5b9d5094cf66.png">
 
 <img width="500" alt="Screen Shot 2022-05-11 at 12 04 46 PM" src="https://user-images.githubusercontent.com/73784742/167766958-7709dac5-6194-4779-9dd6-e093e5fd7b2f.png">
+
+#### Use Case: WITH
+
+<img width="500" alt="Screen Shot 2022-05-11 at 1 46 43 PM" src="https://user-images.githubusercontent.com/73784742/167777388-8ea3485e-b51d-45ac-9f04-41557bc0de64.png">
+
+```sql
+DROP TABLE IF EXISTS dinosaurs;
+CREATE TABLE dinosaurs (species text, height float, length float, legs int);
+
+INSERT INTO dinosaurs(species, height, length, legs) VALUES
+  ('Ceratosaurus',      4.0,   6.1,  2),
+  ('Deinonychus',       1.5,   2.7,  2),
+  ('Microvenator',      0.8,   1.2,  2),
+  ('Plateosaurus',      2.1,   7.9,  2),
+  ('Spinosaurus',       2.4,  12.2,  2),
+  ('Tyrannosaurus',     7.0,  15.2,  2),
+  ('Velociraptor',      0.6,   1.8,  2),
+  ('Apatosaurus',       2.2,  22.9,  4),
+  ('Brachiosaurus',     7.6,  30.5,  4),
+  ('Diplodocus',        3.6,  27.1,  4),
+  ('Supersaurus',      10.0,  30.5,  4),
+  ('Albertosaurus',     4.6,   9.1,  NULL),  -- Bi-/quadropedality is
+  ('Argentinosaurus',  10.7,  36.6,  NULL),  -- unknown for these species.
+  ('Compsognathus',     0.6,   0.9,  NULL),  --
+  ('Gallimimus',        2.4,   5.5,  NULL),  -- Try to infer pedality from
+  ('Mamenchisaurus',    5.3,  21.0,  NULL),  -- their ratio of body height
+  ('Oviraptor',         0.9,   1.5,  NULL),  -- to length.
+  ('Ultrasaurus',       8.1,  30.5,  NULL);  --
+
+TABLE dinosaurs;
+```
+
+|species        |height|length|legs|
+|---------------|------|------|----
+|Ceratosaurus   |   4.0|   6.1|   2|
+|Deinonychus    |   1.5|   2.7|   2|
+|Microvenator   |   0.8|   1.2|   2|
+|Plateosaurus   |   2.1|   7.9|   2|
+|Spinosaurus    |   2.4|  12.2|   2|
+|Tyrannosaurus  |   7.0|  15.2|   2|
+|Velociraptor   |   0.6|   1.8|   2|
+|Apatosaurus    |   2.2|  22.9|   4|
+|Brachiosaurus  |   7.6|  30.5|   4|
+|Diplodocus     |   3.6|  27.1|   4|
+|Supersaurus    |  10.0|  30.5|   4|
+|Albertosaurus  |   4.6|   9.1|    |
+|Argentinosaurus|  10.7|  36.6|    |
+|Compsognathus  |   0.6|   0.9|    |
+|Gallimimus     |   2.4|   5.5|    |
+|Mamenchisaurus |   5.3|  21.0|    |
+|Oviraptor      |   0.9|   1.5|    |
+|Ultrasaurus    |   8.1|  30.5|    |
+
+Infer bipedality (or quadropedality) for dinosaurs based on their body length and shape.
+
+<img width="500" alt="Screen Shot 2022-05-11 at 1 50 57 PM" src="https://user-images.githubusercontent.com/73784742/167777884-9eae2f42-4034-490d-afa6-5f0508a1ea37.png">
+
+```sql
+-- ➊ Determine characteristic height/length (= body shape) ratio
+-- separately for bipedal and quadropedal dinosaurs:
+WITH bodies(legs, shape) AS (
+  SELECT d.legs, AVG(d.height / d.length) AS shape
+  FROM   dinosaurs AS d
+  WHERE  d.legs IS NOT NULL
+  GROUP BY d.legs
+)
+-- ➋ Realize query plan (assumes table bodies exists)
+SELECT d.species, d.height, d.length,
+       (SELECT b.legs                               -- Find the shape entry in bodies
+        FROM   bodies AS b                          -- that matches d's ratio of
+        ORDER BY abs(b.shape - d.height / d.length) -- height to length the closest
+        LIMIT 1) AS legs                            -- (pick row with minimal shape difference)
+FROM  dinosaurs AS d
+WHERE d.legs IS NULL
+                      -- ↑ Locomotion of dinosaur d is unknown
+  UNION ALL           ----------------------------------------
+                      -- ↓ Locomotion of dinosaur d is known
+SELECT d.*
+FROM   dinosaurs AS d
+WHERE  d.legs IS NOT NULL;
+```
+
