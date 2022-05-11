@@ -386,7 +386,7 @@ GROUP BY ROLLUP (class, "herbivore?", legs);
 |reptilia|          |    |Velociraptor, Iguanodon, Brachiosaurus                                          |
 |        |          |    |Sabretooth, Megatherium, Paraceratherium, Velociraptor, Iguanodon, Brachiosaurus|
 
-<img width="500" alt="Screen Shot 2022-05-10 at 5 31 04 PM" src="https://user-images.githubusercontent.com/73784742/167597320-c64c749f-4c0e-466c-9651-b1216648c800.png">
+<img width="600" alt="Screen Shot 2022-05-10 at 5 31 04 PM" src="https://user-images.githubusercontent.com/73784742/167597320-c64c749f-4c0e-466c-9651-b1216648c800.png">
 
 ```sql
 SELECT string_agg(p.species, ', ') AS species
@@ -443,4 +443,38 @@ GROUP BY CUBE (class, "herbivore?", legs);
 |        |          |   4|Sabretooth, Paraceratherium, Brachiosaurus                                      |
 |        |          |    |Sabretooth, Megatherium, Paraceratherium, Velociraptor, Iguanodon, Brachiosaurus|
 
-<img width="500" alt="Screen Shot 2022-05-10 at 5 43 21 PM" src="https://user-images.githubusercontent.com/73784742/167599882-b7c9b133-4eeb-451d-ab3b-158b75d3adcc.png">
+<img width="600" alt="Screen Shot 2022-05-10 at 5 43 21 PM" src="https://user-images.githubusercontent.com/73784742/167599882-b7c9b133-4eeb-451d-ab3b-158b75d3adcc.png">
+
+### SQL evaluation order 
+
+<img width="500" alt="Screen Shot 2022-05-11 at 11 51 10 AM" src="https://user-images.githubusercontent.com/73784742/167765616-5601767e-dad9-49fb-8223-4ab121c6f879.png">
+
+```sql
+EXPLAIN VERBOSE
+
+SELECT DISTINCT ON ("∑d") 1 AS branch, NOT t.c AS "¬c", SUM(t.d) AS "∑d"
+FROM   T AS t
+WHERE  t.b = 'x'
+GROUP BY "¬c"
+HAVING SUM(t.d) > 0
+
+  UNION ALL
+
+SELECT DISTINCT ON ("∑d") 2 AS branch, NOT t.c AS "¬c", SUM(t.d) AS "∑d"
+FROM   T AS t
+WHERE  t.b = 'x'
+GROUP BY "¬c"
+HAVING SUM(t.d) > 0
+
+ORDER BY branch
+OFFSET 0
+LIMIT  7;
+```
+
+<img width="600" alt="Screen Shot 2022-05-11 at 12 00 56 PM" src="https://user-images.githubusercontent.com/73784742/167766563-1a215c2d-f6bb-4f06-9d53-5d21562302f7.png">
+
+### WITH (Common Table Expressions)
+
+<img width="500" alt="Screen Shot 2022-05-11 at 12 04 11 PM" src="https://user-images.githubusercontent.com/73784742/167766899-d0b1058a-eba0-4d88-b48b-5b9d5094cf66.png">
+
+<img width="500" alt="Screen Shot 2022-05-11 at 12 04 46 PM" src="https://user-images.githubusercontent.com/73784742/167766958-7709dac5-6194-4779-9dd6-e093e5fd7b2f.png">
