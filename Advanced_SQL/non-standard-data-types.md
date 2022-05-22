@@ -36,7 +36,7 @@ ORDER BY s.film;
 ```
 
 |film|title                  |release   |
-|----+-----------------------|----------|
+|----|-----------------------|----------|
 |ANH |A New Hope             |1977-05-25|
 |ESB |The Empire Strikes Back|1980-05-21|
 |TPM |The Phantom Menace     |1999-05-19|
@@ -65,3 +65,29 @@ ORDER BY s.release;
 |TFA |The Force Awakens      |2015-12-18|
 |TLJ |The Last Jedi          |2017-12-15|
 |TROS|The Rise of Skywalker  |2019-12-19|
+
+## Binary Arrays (BLOBs)
+
+<img width="500" alt="Screen Shot 2022-05-22 at 6 54 16 PM" src="https://user-images.githubusercontent.com/73784742/169691734-2737fbfe-5ad6-4ef6-abb8-36fe904ede67.png">
+
+## Ranges (Intervals)
+
+<img width="500" alt="Screen Shot 2022-05-22 at 6 55 06 PM" src="https://user-images.githubusercontent.com/73784742/169691752-4eac9ba1-1ae9-4323-be44-588f86ddb4fb.png">
+
+<img width="500" alt="Screen Shot 2022-05-22 at 6 55 38 PM" src="https://user-images.githubusercontent.com/73784742/169691770-93b54508-cd0b-4618-956d-0bf7f11a90ab.png">
+
+```sql
+SELECT '(1,10]' :: int4range;
+```
+
+|int4range|
+|---------|
+|   [2,11)|
+
+```sql
+SELECT int4range(1,5,'[]') * '[5,10)' :: int4range;
+```
+
+|?column?|
+|--------|
+|   [5,6)|
