@@ -4,7 +4,7 @@
 > 
 > -- by Haruki Murakami
 
-_33 TILs and counting..._
+_35 TILs and counting..._
 
 This is a collection of short articles about things I've learned. Inspired by [simonw](https://github.com/simonw/til)
 
@@ -12,7 +12,9 @@ This is a collection of short articles about things I've learned. Inspired by [s
 ### Advanced_SQL
 
 - [The Core of SQL](Advanced_SQL/the-core-of-sql.md) - 2022.05.10
-
+- [Standard Data Types](Advanced_SQL/standard-data-types.md) - 2022.05.21
+- [Non-Standard Data Types](Advanced_SQL/non-standard-data-types.md) - 2022.05.23
+-
 ### SQL for Data Analysis
 
 - [Time Series Analysis](DataAnalysis/TimeSeriesAnalysis/time-series-analysis.ipynb) - 2022.04.19
