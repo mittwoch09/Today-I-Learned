@@ -291,4 +291,81 @@ FROM   jsonb_populate_recordset(NULL :: T, (TABLE like_T_but_as_JSON)) AS t;
 |4|y|false|20|
 |5|x|true |  |
 
+## Sequences
+
+<img width="500" alt="Screen Shot 2022-05-23 at 3 36 43 PM" src="https://user-images.githubusercontent.com/73784742/169767737-c5bd3d17-8c1d-4eda-b776-3826ba0bffd4.png">
+
+```sql
+DROP SEQUENCE IF EXISTS seq;
+CREATE SEQUENCE seq START 41 MAXVALUE 100 CYCLE;
+
+SELECT nextval('seq');      -- ⇒ 41
+SELECT nextval('seq');      -- ⇒ 42
+SELECT currval('seq');      -- ⇒ 42
+SELECT setval ('seq',100);  -- ⇒ 100 (+ side effect)
+SELECT nextval('seq');      -- ⇒ 1   (wrap-around)
+```
+
+```sql
+SELECT setval ('seq',100,false);  -- ⇒ 100 (+ side effect)
+SELECT nextval('seq');            -- ⇒ 100
+```
+
+```sql
+TABLE seq;
+```
+
+|last_value|log_cnt|is_called|
+|----------|-------|---------|
+|         1|     32|true     |
+
+```sql
+DROP TABLE IF EXISTS self_concious_T;
+CREATE TABLE self_concious_T (me int GENERATED ALWAYS AS IDENTITY,
+                              a  int ,
+                              b  text,
+                              c  boolean,
+                              d  int);
+```
+
+```sql
+--                    column me missing (⇒ receives GENERATED identity value)
+--                         ╭───┴──╮
+INSERT INTO self_concious_T(a,b,c,d) VALUES
+  (1, 'x',  true, 10);
+
+INSERT INTO self_concious_T(a,b,c,d) VALUES
+  (2, 'y',  true, 40);
+```
+
+```sql
+INSERT INTO self_concious_T(a,b,c,d) VALUES
+  (5, 'x', true,  NULL),
+  (4, 'y', false, 20),
+  (3, 'x', false, 30)
+  RETURNING me, c;
+--            ↑
+--     General INSERT feature:
+--     Any list of expressions involving the column name of
+--     the inserted rows (or * to return entire inserted rows)
+--     ⇒ User-defined SQL functions (UDFs)
+```
+
+|me|c    |
+|--|-----
+| 3|true |
+| 4|false|
+| 5|false|
+
+```sql
+TABLE self_concious_T;
+```
+
+|me|a|b|c    |d |
+|--|-|-|-----|--|
+| 1|1|x|true |10|
+| 2|2|y|true |40|
+| 3|5|x|true |  |
+| 4|4|y|false|20|
+| 5|3|x|false|30|
 
