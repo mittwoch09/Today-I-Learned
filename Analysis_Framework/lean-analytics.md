@@ -64,36 +64,36 @@
         - Users who join you in the first week will have a different experience from those who join later on.
         - Imagine that you’re running an online retailer. Each month, you acquire a thousand new customers, and they spend some money.
         
-        |                        |January|February|March|April|May |
-        |------------------------|-------|--------|-----|-----|----|
-        |Total customers         |1000   |2000    |3000 |4000 |5000|
-        |Avg revenue per customer|5.00   |4.50    |4.33 |4.25 |4.50|
+            |                        |January|February|March|April|May |
+            |------------------------|-------|--------|-----|-----|----|
+            |Total customers         |1000   |2000    |3000 |4000 |5000|
+            |Avg revenue per customer|5.00   |4.50    |4.33 |4.25 |4.50|
 
-        Since you aren’t comparing recent customers to older ones—and because you’re commingling the purchases of a customer who’s been around for five months with those of a brand new one—it’s hard to tell.
+        - Since you aren’t comparing recent customers to older ones—and because you’re commingling the purchases of a customer who’s been around for five months with those of a brand new one—it’s hard to tell.
 
-        |           |January|February|March|April|May |
-        |-----------|-------|--------|-----|-----|----|
-        |New users  |1000   |1000    |1000 |1000 |1000|
-        |Total users|1000   |2000    |3000 |4000 |5000|
-        |Month 1    |5.00   |3.00    |2.00 |1.00 |0.50|
-        |Month 2    |       |6.00    |4.00 |2.00 |1.00|
-        |Month 3    |       |        |7.00 |6.00 |5.00|
-        |Month 4    |       |        |     |8.00 |7.00|
-        |Month 5    |       |        |     |     |9.00|
+            |           |January|February|March|April|May |
+            |-----------|-------|--------|-----|-----|----|
+            |New users  |1000   |1000    |1000 |1000 |1000|
+            |Total users|1000   |2000    |3000 |4000 |5000|
+            |Month 1    |5.00   |3.00    |2.00 |1.00 |0.50|
+            |Month 2    |       |6.00    |4.00 |2.00 |1.00|
+            |Month 3    |       |        |7.00 |6.00 |5.00|
+            |Month 4    |       |        |     |8.00 |7.00|
+            |Month 5    |       |        |     |     |9.00|
 
-        Customers who arrived in month five are spending, on average, $9 in their first month—nearly double that of those who arrived in month one. That’s huge growth!
+        - Customers who arrived in month five are spending, on average, $9 in their first month—nearly double that of those who arrived in month one. That’s huge growth!
 
-        |        |Month of use            |
-        |--------|----|----|----|----|----|
-        |Cohort  |1   |2   |3   |4   |5   |
-        |January |5.00|3.00|2.00|1.00|0.50|
-        |February|6.00|4.00|2.00|1.00|    |
-        |March   |7.00|6.00|5.00|    |    |
-        |April   |8.00|7.00|    |    |    |
-        |May     |9.00|    |    |    |    |
-        |Averages|7.00|5.00|3.00|1.00|0.50|
+            |        |    |Month|of  |use |    |
+            |--------|----|-----|----|----|----|
+            |Cohort  |1   |2    |3   |4   |5   |
+            |January |5.00|3.00 |2.00|1.00|0.50|
+            |February|6.00|4.00 |2.00|1.00|    |
+            |March   |7.00|6.00 |5.00|    |    |
+            |April   |8.00|7.00 |    |    |    |
+            |May     |9.00|     |    |    |    |
+            |Averages|7.00|5.00 |3.00|1.00|0.50|
         
-        Another way to understand cohorts is to line up the data by the users’ experience. This shows another critical metric: how quickly revenue declines after the first month.
+        - Another way to understand cohorts is to line up the data by the users’ experience. This shows another critical metric: how quickly revenue declines after the first month.
         - This kind of reporting allows you to see patterns clearly against the lifecycle of a customer, rather than slicing across all customers blindly without accounting for the natural cycle a customer undergoes.
     - A/B and Multivariate Tesing
         - Studies in which different groups of test subjects are given different experiences at the same time are called cross-sectional studies. 
