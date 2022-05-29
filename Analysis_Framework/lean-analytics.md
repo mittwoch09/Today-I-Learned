@@ -141,14 +141,14 @@
         - If you make more money from customers than it costs you to acquire them—and you do so consistently—you’re sustainable.
     - Ash Maurya’s Lean Canvas
         - Once you’ve filled out the Lean Canvas (or most of it), you start running experiments to validate or invalidate what you’ve hypothesized.
-        1. Problem : Respondents who have this need, respondents who are aware of having the need
-        2. Solution : Respondents who try the MVP, engagement, churn, most-used/least-used features, people willing to pay
-        3. Unique value proposition : Feedback scores, independent ratings, sentiment analysis, customer-worded descriptions, surveys, search, and competitive analysis
-        4. Customer segments : How easy it is to find groups of prospects, unique keyword segments, targeted funnel traffic from a particular source
-        5. Channels : Leads and customers per channel, viral coefficient and cycle, net promoter score, open rate, affiliate margins, click-through rate, Pagerank, message reach
-        6. Unfair advantage : Respondents’ understanding of the UVP (Unique Value Proposition), patents, brand equity, barriers to entry, number of new entrants, exclusivity of relationships
-        7. Revenue streams : Lifetime customer value, average revenue per user, conversion rate, shopping cart size, click-through rate
-        8. Cost structure : Fixed costs, cost of customer acquisition, cost of servicing the nth customer, support costs, keyword costs
+            1. Problem : Respondents who have this need, respondents who are aware of having the need
+            2. Solution : Respondents who try the MVP, engagement, churn, most-used/least-used features, people willing to pay
+            3. Unique value proposition : Feedback scores, independent ratings, sentiment analysis, customer-worded descriptions, surveys, search, and competitive analysis
+            4. Customer segments : How easy it is to find groups of prospects, unique keyword segments, targeted funnel traffic from a particular source
+            5. Channels : Leads and customers per channel, viral coefficient and cycle, net promoter score, open rate, affiliate margins, click-through rate, Pagerank, message reach
+            6. Unfair advantage : Respondents’ understanding of the UVP (Unique Value Proposition), patents, brand equity, barriers to entry, number of new entrants, exclusivity of relationships
+            7. Revenue streams : Lifetime customer value, average revenue per user, conversion rate, shopping cart size, click-through rate
+            8. Cost structure : Fixed costs, cost of customer acquisition, cost of servicing the nth customer, support costs, keyword costs
     - Sean Ellis’s Startup growth Pyramid
         - PRODUCT/MARKET FIT : Decide what you sell to whom, then prove it.
         - STACK THE ODDS : Find a defensible unfair advantage and tweak it.
@@ -157,11 +157,17 @@
         - It’s a way of understanding how you first come to someone’s attention, and the journey she takes from that initial awareness through to a goal you want her to complete (such as making a purchase, creating content, or sharing a message).
         - Often, measuring a long funnel involves injecting some kind of tracking into the initial signal, so you can follow the user as she winds up on your site, which many analytics packages can now report.
 
-<img width="460" alt="Screen Shot 2022-05-28 at 2 43 40 PM" src="https://user-images.githubusercontent.com/73784742/170813881-9c035544-5d0a-4f10-8b21-c4ef26b44056.png">
+    <img width="460" alt="Screen Shot 2022-05-28 at 2 43 40 PM" src="https://user-images.githubusercontent.com/73784742/170813881-9c035544-5d0a-4f10-8b21-c4ef26b44056.png">
 
 - Some, like Pirate Metrics and the Long Funnel, focus on the act of acquiring and converting customers.
 - Others, like the Engines of Growth and the Startup Growth Pyramid, offer strategies for knowing when or how to grow.
 - Some, like the Lean Canvas, help you map out the components of your business model so you can evaluate them independent of one another.
 
 ### CHAPTER 6 : The Discipline of One Metric That Matters
+- You might make your product sticky for Its core users, then use that to grow virally, and then use the user base to grow revenue. That’s focus.
+- Don’t let your ability to track so many things distract you. Capture everything, but focus on what’s important.
+- CASE STUDY : Moz Tracks Fewer KPIs to Increase Focus
+    - Moz is metrics-driven but that doesn't mean it's swimming in data. It relies on one metric above all others:Net Adds.
+    - One of its investors actually suggested *reducing* the number of metrics the company tracks to stay focused on the big picture.
+    - While it’s great to track many metrics, it’s also a sure way to lose focus. Picking a minimal set of KPIs on which your business assumptions rely is the best way to get the entire organization moving in the same direction.
 
