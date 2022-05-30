@@ -170,4 +170,40 @@
     - Moz is metrics-driven but that doesn't mean it's swimming in data. It relies on one metric above all others:Net Adds.
     - One of its investors actually suggested *reducing* the number of metrics the company tracks to stay focused on the big picture.
     - While it’s great to track many metrics, it’s also a sure way to lose focus. Picking a minimal set of KPIs on which your business assumptions rely is the best way to get the entire organization moving in the same direction.
+- Picking the OMTM(One Metric That Matters) lets you run more controlled experiments quickly and compare the results more effectively.
+- When you’re focused on acquiring users (and converting them into customers), your OMTM may be tied to which acquisition channels are working best or the conversion rate from signup to active user. When you’re focused on retention, you may be looking at churn, and experimenting with pricing, features, improving customer support, and so on.
+- Let’s look at four reasons why you should use the One Metric That Matters.
+    - Let’s look at four reasons why you should use the One Metric That Matters.
+    - It forces you to draw a line in the sand and have clear goals.
+    - It focuses the entire company.
+    - It inspires a culture of experimentation.
+- When everyone rallies around the OMTM and is given the opportunity to experiment independently to improve it, it’s a powerful force.
+- CASE STUDY - Solare Focuses on a Few Key Metrics
+    - Randy explained when staffing costs exceed 30% of gross revenues, that’s bad, because it means that you’re either spending too much on staff or not deriving enough revenue per customer.
+    - Restaurants know from experience that demand is tied to reservations, and what the right ratio of staffing to revenue should be.
+    - Good metrics help predict the future, giving you an opportunity to anticipate problems and correct them.
+- You need to pick a number, set it as the target, and have enough confidence that if you hit it, you consider it success. And if you don’t hit the target, you need to go back to the drawing board and try again.
+- If you know that you need 10% of your users to sign up for the paid version of your site in order to meet your business targets, then that’s your number.
+- Knowing an industry baseline means you know what’s likely to happen, and you can compare yourself to it.
+- Optimizing your OMTM not only squeezes that metric so you get the most out of it, but it also reveals the next place you need to focus your efforts, which often happens at an inflection point for your business
+
+### CHAPTER 7 - What Business Are you in?
+- Business growth comes from improving one of these five “knobs”:
+    - **More stuff** means adding products or services, preferably those you know your customers want so you don’t waste time building things they won’t use or buy.
+    - **More people** means adding users, ideally through virality or word of mouth, but also through paid advertising.
+    - **More often** means stickiness (so people come back), reduced churn (so they don’t leave), and repeated use (so they use it more frequently).
+    - **More money** means upselling and maximizing the price users will pay, or the revenue from ad clicks, or the amount of content they create, or the number of in-game purchases they make.
+    - **More efficiently** means reducing the cost of delivering and supporting your service, but also lowering the cost of customer acquisition by doing less paid advertising and more word of mouth.
+- You need to segment real, valuable users from drive-by, curious, or detrimental ones. Then you need to make changes that maximize the real users and weed out the bad ones.
+- Predicting revenues accurately relies on an understanding of how its different user segments employ the product.
+- Not all customers are good. Don’t fall victim to customer counting. Instead, optimize for *good* customers and segment your activities based on the kinds of customer those activities attract.
+- You can build business models this way, but instead of heads, torsos, and feet, you have several aspects of a business: the acquisition channel, selling tactic, revenue source, product type, and delivery model.
+    - The **acquisition channel**channel is how people find out about you.
+    - The **selling tactic** is how you convince visitors to become users or users to become customers.
+    - The **revenue source** is simply how you make money.
+    - The **product type** is what value your business offers in return for the revenue.
+    - The **delivery model** is how you get your product to the customer.
+    <img width="500" alt="Screen Shot 2022-05-30 at 12 19 39 PM" src="https://user-images.githubusercontent.com/73784742/170916402-f8939536-ea91-4a1b-bdfc-43501d2eba3f.png">
+
+### CHAPTER 8 - Model One:E-commerce
 
