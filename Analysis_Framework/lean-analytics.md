@@ -206,4 +206,31 @@
     <img width="500" alt="Screen Shot 2022-05-30 at 12 19 39 PM" src="https://user-images.githubusercontent.com/73784742/170916402-f8939536-ea91-4a1b-bdfc-43501d2eba3f.png">
 
 ### CHAPTER 8 - Model One:E-commerce
-
+- Early e-commerce models consisted of a relatively simple “funnel”: a visitor arrived at the site, navigated through a series of pages to get to a particular item, clicked “buy,” provided some payment information, and completed a purchase.
+- To understand this, he calculates the annual repurchase rate: what percentage of people who bought something from you last year will do so this year?
+    - Acquisition mode
+        If less than 40% of last year’s buyers will buy this year, then the focus of the business is on new customer acquisition. Loyalty pro- grams aren’t good long-term investments for this kind of business.
+    - Hybrid mode
+        If 40–60% of last year’s buyers will buy this year, then the com- pany will grow with a mix of new customers and returning cus- tomers. It needs to focus on acquisition as well as on increasing purchase frequency—the average customer will buy 2 to 2.5 times a year.
+    - Loyalty mode
+        If 60% or more of last year’s buyers will buy something this year, the company needs to focus on loyalty, encouraging loyal clients to buy more frequently.
+- Getting pricing right is critical—particularly if you’re an acquisition- mode e-commerce site that gets only one chance to extract revenue from a customer.
+- The company cares about several key metrics:
+    - Conversion Rate
+        - Conversion rate is simply the percentage of visitors to your site who buy something.
+        - Early on, conversion rate may even be more important than total revenue because your initial goal is to simply prove that someone will buy something.
+    - Purchases Per year
+        - If you look at the repurchase rate on a 90-day cycle, it becomes a very good leading indicator for what type of e-commerce site you have.
+        - There’s no right or wrong answer, but it is important to know whether to focus more on loyalty or more on acquisition.
+    - Shopping Cart Size
+        - Not only do you want to know what percentage of people bought something, you also want to know how much they spent.
+        - The key to successful e-commerce is in increasing shopping cart size; that’s really where the money is made.
+    - Abandonment
+        - The number of people who abandon a funnel at each of these stages is the abandonment rate.
+        - It’s important to analyze it for each step in order to see which parts of the process are hurting you the most.
+    - Cost of Customer Acquisition
+        - Once you know you can extract money from visitors, you’ll want to drive traffic to the site.
+        - E-commerce sites are simple math: make more from selling things than it costs you to find buyers and deliver the goods.
+    - Revenue Per Customer
+        - Even if your business doesn’t engender loyalty (because you’re selling something that’s infrequently purchased), you want to maximize revenue per customer.
+        - Revenue per customer is really an aggregate metric of other key numbers, and represents a good, single measure of your e-commerce business’s health.
