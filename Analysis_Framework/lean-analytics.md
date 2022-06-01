@@ -234,3 +234,39 @@
     - Revenue Per Customer
         - Even if your business doesn’t engender loyalty (because you’re selling something that’s infrequently purchased), you want to maximize revenue per customer.
         - Revenue per customer is really an aggregate metric of other key numbers, and represents a good, single measure of your e-commerce business’s health.
+        - CASE STUDY : WineExpress Increases Revenue by 41% Per Visitor
+            - WineExpress.com used A/B testing to find a better-converting page.
+            - While conversion went up, the real gain was a 41% increase in revenue per visitor.
+            - You want *high revenue per visitor*, or *high customer lifetime value* (CLV), because that’s what’s really driving your business model.
+    - Keywords and Search terms
+        - Most people find products by searching for them, whether that’s in a web browser, on a search engine, or within a site.
+        - First, you want to be sure you have what people are after. If users are searching for something and not finding it—or searching, then pressing the back button—that’s a sign that you don’t have what they want.
+        - Second, if a significant chunk of searches fall into a particular category, that’s a sign that you might want to alter your positioning, or add that category to the home page, to see if you can capture more of that market faster.
+    - Recommendation Acceptance Rate
+        - Some use what the buyer has purchased in the past; others try to predict purchases from visitor attributes like geography, referral, or what the visitor has clicked so far.
+        - When you make adjustments to the recommendation engine, you’ll want to see if you moved the needle in the right direction.
+    - Virality
+        - It has the lowest cost of customer acquisition and the highest implied recommendation from someone the recipient trusts.
+    - Mailing List Click-through Rates
+        - More and more social applications are leveraging the power of email to drive repeat usage and retention.
+        - You calculate the email click-through rate by dividing the number of visits you get from a campaign by the number of messages you’ve sent.
+- Offline components of any e-commerce business need to be analyzed carefully.
+    - E-commerce companies can most likely achieve significant operational efficiencies just by optimizing their fulfillment and shipping processes.
+    - Improving your inventory management can make a big difference to your bottom line.
+    - You can also hide these items from searches, or again, make sure they appear lower in the search results.
+
+- The E-commerece Customer Lifecycle
+
+<img width="400" alt="Screen Shot 2022-06-01 at 11 14 47 AM" src="https://user-images.githubusercontent.com/73784742/171320613-5c3aff04-764b-409e-a2ba-23b595a91d16.png">
+
+- From an analytics perspective, this means tracking additional metrics for the rate of payment expiration, the effectiveness of renewal campaigns, and the factors that help (or hinder) renewal rates.
+- Key takeaways
+    - It’s vital to know if you’re focused on loyalty or acquisition. This drives your whole marketing strategy and many of the features you build.
+    - Searches, both off- and on-site, are an increasingly common way of finding something for purchase.
+    - While conversion rates, repeat purchases, and transaction sizes are important, the ultimate metric is the product of the three of them: revenue per customer.
+    - Don’t overlook real-world considerations like shipping, warehouse logistics, and inventory.
+
+### CHAPTER 9 - Model Two:Software as a Service(Saas)
+
+
+
