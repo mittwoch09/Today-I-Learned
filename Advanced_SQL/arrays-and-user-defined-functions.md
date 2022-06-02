@@ -1,6 +1,6 @@
 ## Table-Generating Functions
 
-<img align="left" width="500" alt="Screen Shot 2022-06-01 at 1 56 55 PM" src="https://user-images.githubusercontent.com/73784742/171337423-985c9a2f-421a-48a3-8d53-10a48a838a9d.png">
+<img width="500" alt="Screen Shot 2022-06-01 at 1 56 55 PM" src="https://user-images.githubusercontent.com/73784742/171337423-985c9a2f-421a-48a3-8d53-10a48a838a9d.png">
 
 ```sql
 -- 1, 3, 5, 7, 9 (since 1 <= i <= 10)
@@ -51,7 +51,7 @@ FROM (VALUES (string_to_array('Star Wars', ' '))) AS _(xs),
 
 ## A Bridge Between Arrays and Tables: unnest & array_agg
 
-<img align="left" width="500" alt="Screen Shot 2022-06-01 at 1 56 10 PM" src="https://user-images.githubusercontent.com/73784742/171337336-886e57fb-7883-4469-9d85-b1cab95f96d4.png">
+<img width="500" alt="Screen Shot 2022-06-01 at 1 56 10 PM" src="https://user-images.githubusercontent.com/73784742/171337336-886e57fb-7883-4469-9d85-b1cab95f96d4.png">
 
 ```sql
 SELECT starwars.*
@@ -83,9 +83,9 @@ FROM   unnest(ARRAY[4,5,1,2,3,6,7,8,9],              -- episodes
 
 ## User-Defined SQL Functions (UDFs)
 
-<img align="left" width="500" alt="Screen Shot 2022-06-01 at 2 25 03 PM" src="https://user-images.githubusercontent.com/73784742/171340982-c614b36b-1dd3-49d8-a7c0-159fe714ab04.png">
+<img width="500" alt="Screen Shot 2022-06-01 at 2 25 03 PM" src="https://user-images.githubusercontent.com/73784742/171340982-c614b36b-1dd3-49d8-a7c0-159fe714ab04.png">
 
-<img align="left" width="500" alt="Screen Shot 2022-06-01 at 2 26 50 PM" src="https://user-images.githubusercontent.com/73784742/171341255-559d5e4b-4de4-420e-aa90-5f4adcf1f284.png">
+<img width="500" alt="Screen Shot 2022-06-01 at 2 26 50 PM" src="https://user-images.githubusercontent.com/73784742/171341255-559d5e4b-4de4-420e-aa90-5f4adcf1f284.png">
 
 ### Example UDF: Issue Unique ID, Write Protocol
 
@@ -171,7 +171,7 @@ FROM   unnest2(ARRAY[ARRAY['a','b','c'],
 
 ## Dependent iteration (LATERAL)
 
-<img align="left" width="500" alt="Screen Shot 2022-06-02 at 2 30 08 PM" src="https://user-images.githubusercontent.com/73784742/171567196-f7858b15-b5a3-4478-9337-ee0bd77d9703.png">
+<img width="500" alt="Screen Shot 2022-06-02 at 2 30 08 PM" src="https://user-images.githubusercontent.com/73784742/171567196-f7858b15-b5a3-4478-9337-ee0bd77d9703.png">
 
 ```sql
 -- Find the three tallest two- or four-legged dinosaurs:
