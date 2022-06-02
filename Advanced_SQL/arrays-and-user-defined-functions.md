@@ -168,3 +168,47 @@ FROM   unnest2(ARRAY[ARRAY['a','b','c'],
 |c   |  7|
 |f   |  8|
 |z   |  9|
+
+## Dependent iteration (LATERAL)
+
+<img align="left" width="500" alt="Screen Shot 2022-06-02 at 2 30 08 PM" src="https://user-images.githubusercontent.com/73784742/171567196-f7858b15-b5a3-4478-9337-ee0bd77d9703.png">
+
+```sql
+-- Find the three tallest two- or four-legged dinosaurs:
+
+SELECT locomotion.legs, tallest.species, tallest.height
+FROM   (VALUES (2), (4)) AS locomotion(legs),
+       LATERAL (SELECT d.*
+                FROM   dinosaurs AS d
+                WHERE  d.legs = locomotion.legs
+                ORDER BY d.height DESC
+                LIMIT 3) AS tallest;
+```
+
+```sql
+-- Equivalent reformulation without LATERAL
+
+WITH ranked_dinosaurs(species, legs, height, rank) AS (
+  SELECT d1.species, d1.legs, d1.height,
+         (SELECT COUNT(*)                          -- number of
+          FROM   dinosaurs AS d2                   -- dinosaurs d2
+          WHERE  d1.legs = d2.legs                 -- in d1's peer group
+          AND    d1.height <= d2.height) AS rank   -- that are as large or larger as d1
+  FROM   dinosaurs AS d1
+  WHERE  d1.legs IS NOT NULL
+)
+SELECT d.legs, d.species, d.height
+FROM   ranked_dinosaurs AS d
+WHERE  d.legs IN (2,4)
+AND    d.rank <= 3
+ORDER BY d.legs, d.rank;
+```
+
+|legs|species      |height|
+|----|-------------|------|
+|   2|Tyrannosaurus|   7.0|
+|   2|Ceratosaurus |   4.0|
+|   2|Spinosaurus  |   2.4|
+|   4|Supersaurus  |  10.0|
+|   4|Brachiosaurus|   7.6|
+|   4|Diplodocus   |   3.6|
