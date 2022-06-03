@@ -267,6 +267,22 @@
     - Don’t overlook real-world considerations like shipping, warehouse logistics, and inventory.
 
 ### CHAPTER 9 - Model Two:Software as a Service(Saas)
-
-
+- Most SaaS providers generate revenue from a monthly (or yearly) subscription that users pay.
+- Finding the best mix of these tiers and prices is a constant challenge, and SaaS companies invest considerable effort in finding ways to upsell a user to higher, more lucrative tiers.
+- The company cares about the following key metrics:
+    - Attention : How effectively the business attracts visitors.
+    - Enrollment : How many visitors become free or trial users, if you’re relying on one of these models to market the service.
+    - Stickiness : How much the customers use the product.
+    - Conversion : How many of the users become paying customers, and how many of those switch to a higher-paying tier.
+    - Revenue per customer : How much money a customer brings in within a given time period.
+    - Customer acquisition cost : How much it costs to get a paying user.
+    - Virality : How likely customers are to invite others and spread the word, and how long it takes them to do so.
+    - Upselling : What makes customers increase their spending, and how often that happens.
+    - Uptime and reliability : How many complaints, problem escalations, or outages the company has.
+    - Churn : How many users and customers leave in a given time period.
+    - Lifetime value : How much customers are worth from cradle to grave.
+- CASE STUDY : Backupify’s Customer Lifecycle Learning
+    - Before focusing on sophisticated financial metrics, start with revenue. But don’t ignore costs, because profitability is the real key to growth.
+    - You know it’s time to scale when your paid engine is humming along nicely, which happens when the CAC is a small fraction of the CLV—a sure sign you’re getting a good return on your investment.
+    - Most SaaS businesses thrive on monthly recurring revenue— customers continue to pay month after month—which is a great foundation on which to build a business.
 
