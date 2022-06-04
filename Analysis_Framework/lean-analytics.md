@@ -285,4 +285,30 @@
     - Before focusing on sophisticated financial metrics, start with revenue. But don’t ignore costs, because profitability is the real key to growth.
     - You know it’s time to scale when your paid engine is humming along nicely, which happens when the CAC is a small fraction of the CLV—a sure sign you’re getting a good return on your investment.
     - Most SaaS businesses thrive on monthly recurring revenue— customers continue to pay month after month—which is a great foundation on which to build a business.
+- If there’s a subsection of users who are hooked on your product—your early adopters—figure out what’s common to them, refocus on their needs, and grow from there.
+- When measuring engagement, don’t just look at a coarse metric like visit frequency. Look for usage patterns throughout your application.
+- Finding these engagement patterns means analyzing data in two ways:
+    - If you find a concentration of desirable behavior in one segment, you can then target it.
+    - To decide whether a change worked, test the change on a subset of your users and compare that subset’s results to others.
+- A data-driven approach to measuring engagement should show you not only *how sticky* your product or service is, but also *who stuck and whether your efforts are paying off*.
+- Churn is the percentage of people who abandon your service over time.
+    (Number of churns during period) / (# customers at beginning of period)
+- Churn isn’t normalized for behavior and size—you can get different churn rates for the same kind of user behavior if you’re not careful.
+    (Number of churns during period) / ([(# customers at beginning of period)+(# customers at end of period)] / 2)
+- The first is to measure churn by cohort, so you’re comparing new to churned users based on when they first became users.
+- The second way is really, really simple, which is why we like it: measure churn each day. The shorter the time period you measure, the less that changes during that specific period will distort things.
 
+<img width="400" alt="Screen Shot 2022-06-04 at 5 11 02 PM" src="https://user-images.githubusercontent.com/73784742/171992714-2cca41d1-377b-4154-aa01-4d241c9e27db.png">
+
+- CASE STUDY : ClearFit Abandons Monthly Subscriptions for 10x growth
+    - ClearFit initially focused on a subscription model for revenue, but customers misinterpreted its low pricing as a sign of a weak offering.
+    - The company switched to a paid listing model, and tripled sales while improving revenue tenfold
+    - The problem wasn’t the business model—it was the pricing and the messages it sent to prospects.
+- In a SaaS model, most of the complexity comes from two things: the promotional approach you choose, and pricing tiers.
+- Key takeaways
+    - While freemium gets a lot of visibility, it’s actually a sales tactic, and one you need to use carefully.
+    - In SaaS, churn is everything. If you can build a group of loyal users faster than they erode, you’ll thrive.
+    - You need to measure user engagement long before the users become customers, and measure customer activity long before they vanish, to stay ahead of the game.
+    - Many people equate SaaS models with subscription, but you can monetize on-demand software in many other ways, sometimes to great effect.
+
+### CHAPTER 10 - Model Three:Free Mobile App
