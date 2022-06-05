@@ -312,3 +312,17 @@
     - Many people equate SaaS models with subscription, but you can monetize on-demand software in many other ways, sometimes to great effect.
 
 ### CHAPTER 10 - Model Three:Free Mobile App
+- Unlike web applications, where it’s easy to do A/B testing and continuous deployment, mobile apps go through the app store gatekeeper—which limits the number of iterations a company can undergo, and hampers experimentation.
+- The company cares about the following key metrics:
+    - Downloads : How many people have downloaded the application, as well as related metrics such as app store placement, and ratings.
+    - Customer acquisition cost (CAC) : How much it costs to get a user and to get a paying customer.
+    - Launch rate : The percentage of people who download the app, actually launch it, and create an account.
+    - Percent of active users/players : The percentage of users who’ve launched the application and use it on a daily and monthly basis: these are your daily active users (DAU) and monthly active users (MAU).
+    - Percentage of users who pay : How many of your users ever pay for anything.
+    - Time to first purchase : How long it takes after activation for a user to make a purchase.
+    - Monthly average revenue per user (ARPU) : This is taken from both purchases and watched ads. Typically, this also includes application-specific information—such as which screens or items encourage the most purchases. Also look at your ARPPU, which is the average revenue per paying user.
+    - Ratings click-through : The percentage of users who put a rating or a review in an app store.
+    - Virality : On average, how many other users a user invites.
+    - Churn : How many customers have uninstalled the application, or haven’t launched it in a certain time period.
+    - Customer lifetime value : How much a user is worth from cradle to grave.
+
