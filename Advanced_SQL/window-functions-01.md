@@ -6,30 +6,25 @@
 
 <img width="500" alt="Screen Shot 2022-06-06 at 2 33 21 PM" src="https://user-images.githubusercontent.com/73784742/172107984-d6442643-bee0-4908-a5d0-3d58cbf9f6a7.png">
 
-**BETWEEN**                 **AND**
-       **UNBOUNDEDE PRECEDING** **CURRENT ROW**  
-       **n PRECEDING**          **n FOLLOWING**
-       **CURRENT ROW**          **UNBOUNDED FOLLOWING**
-
 ### Window Frame Specifications (Variant: RANGE)
 
 <img width="500" alt="Screen Shot 2022-06-06 at 2 45 14 PM" src="https://user-images.githubusercontent.com/73784742/172109702-5fd5c760-8999-4251-9f2d-83d6379ca7ce.png">
 
-**distance measured in terms of |current row - i|**
+`distance measured in terms of |current row - i|`
 
 ### Window Frame Specifications (Variant: GROUPS)
 
 <img width="500" alt="Screen Shot 2022-06-06 at 2 51 18 PM" src="https://user-images.githubusercontent.com/73784742/172110451-77ae4c5e-791e-4168-b486-e8fdaca4e3ca.png">
 
-**distance measured in number of peer groups**
+`distance measured in number of peer groups`
 
 ### Window Frame Specifications: Abbreviations
 
 <img width="500" alt="Screen Shot 2022-06-06 at 3 57 34 PM" src="https://user-images.githubusercontent.com/73784742/172119893-5e159f18-7116-4f84-90f9-c3b889a28e30.png">
 
-**OVER () = all rows form the window frame(for any current row)**
+`OVER () = all rows form the window frame(for any current row)`
 
-**OVER (ORDER BY A) = OVER (ORDER BY A RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)**
+`OVER (ORDER BY A) = OVER (ORDER BY A RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)`
 
 ### WINDOW Clause: Name the Frame
 
