@@ -223,3 +223,121 @@ ORDER BY w.a;
 |q7         |6|         3|{q7,q8,q9}         |
 |q8         |6|         3|{q7,q8,q9}         |
 |q9         |7|         1|{q9}               |
+
+### EXCERCISE
+
+```sql
+DROP TABLE IF EXISTS sensors;
+CREATE TABLE sensors (
+	day     int PRIMARY KEY,
+	weekday TEXT,
+	temp    float,
+	rain    float);
+	
+INSERT INTO sensors(day, weekday, temp, rain) VALUES
+	(1,  'Thu', 13,   0),
+	(2,  'Fri', 10, 800),
+	(3,  'Sat', 12, 300),
+	(4,  'Sun', 16, 100),
+	(5,  'Mon', 20, 400),
+	(6,  'Tue', 20,  80),
+	(7,  'Wed', 18, 500),
+	(8,  'Thu', 14,   0),
+	(9,  'Fri', 10,   0),
+	(10, 'Sat', 12, 500),
+	(11, 'Sun', 14, 300),
+	(12, 'Mon', 14, 800),
+	(13, 'Tue', 16,   0),
+	(14, 'Wed', 15,   0),
+	(15, 'Thu', 18, 100),
+	(16, 'Fri', 17, 100),
+	(17, 'Sat', 15,   0),
+	(18, 'Sun', 16, 300),
+	(19, 'Mon', 16, 400),
+	(20, 'Tue', 19, 200),
+	(21, 'Wed', 19, 100),
+	(22, 'Thu', 18,   0),
+	(23, 'Fri', 17,   0),
+	(24, 'Sat', 16, 200);
+```
+
+```sql
+WITH
+-- Collect weather data for each day (and two days prior)
+three_day_sensors(day, weekday, temp, rain) AS (
+	SELECT s.day, s.weekday,
+		   MIN(s.temp) OVER three_days AS temp,
+		   SUM(s.rain) OVER three_days AS rain
+	FROM   sensors AS s
+	WINDOW three_days AS (ORDER BY s.DAY ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)
+),
+-- Derive sunny/gloomy conditions FROM aggregated sensor readings
+weather(day, weekday, condition) AS (
+	SELECT s.day, s.weekday,
+		   CASE WHEN s.temp >= 15 AND s.rain <= 600
+		   		THEN 'sunny'
+		   		ELSE 'gloomy'
+		   END AS condition
+	FROM   three_day_sensors AS s
+)
+-- Calculate chance of fine weather on a weekday/weekend
+SELECT w.weekday IN ('Sat', 'Sun') AS "weekend?",
+	   (COUNT(*) FILTER (WHERE w.condition = 'sunny') * 100.0 /
+	    COUNT(*)) :: int AS "% fine"
+FROM    weather AS w
+GROUP BY "weekend?";
+```
+
+|weekend?|% fine|
+|--------|------|
+|false   |    29|
+|true    |    43|
+
+### PARTITION BY: Window Frames Inside Partitions
+
+<img width="500" alt="Screen Shot 2022-06-08 at 2 54 31 PM" src="https://user-images.githubusercontent.com/73784742/172551531-472d8788-fad8-4198-acbc-9c691e5bb109.png">
+
+```sql
+SELECT w.row                     AS "current row",
+	   w.a,
+	   w.b                       AS "partition",
+	   COUNT(*)         OVER win AS "frame size",
+	   array_agg(w.row) OVER win AS "rows in frame"
+FROM   W AS w 
+WINDOW win AS (PARTITION BY w.b ORDER BY w.a ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+ORDER BY w.b, w.a, w.row;
+```
+
+|current row|a|partition|frame size|rows in frame   |
+|-----------|-|---------|----------|----------------|
+|q1         |1|O        |         1|{q1}            |
+|q4         |3|O        |         2|{q1,q4}         |
+|q7         |6|O        |         4|{q1,q4,q8,q7}   |
+|q8         |6|O        |         3|{q1,q4,q8}      |
+|q2         |2|X        |         1|{q2}            |
+|q3         |3|X        |         3|{q2,q5,q3}      |
+|q5         |3|X        |         2|{q2,q5}         |
+|q6         |4|X        |         4|{q2,q5,q3,q6}   |
+|q9         |7|X        |         5|{q2,q5,q3,q6,q9}|
+
+```sql
+SELECT w.row             AS "current row",
+	   w.a,
+	   w.b               AS "partition",
+	   SUM(w.a) OVER win AS "SUM(a) so far"
+FROM W AS w 
+WINDOW win AS (PARTITION BY w.b ORDER BY w.a ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+ORDER BY w.b;
+```
+
+|current row|a|partition|SUM(a) so far|
+|-----------|-|---------|-------------|
+|q1         |1|O        |            1|
+|q4         |3|O        |            4|
+|q7         |6|O        |           10|
+|q8         |6|O        |           16|
+|q2         |2|X        |            2|
+|q3         |3|X        |            8|
+|q5         |3|X        |            5|
+|q6         |4|X        |           12|
+|q9         |7|X        |           19|
