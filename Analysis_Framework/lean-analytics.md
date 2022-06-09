@@ -325,4 +325,9 @@
     - Virality : On average, how many other users a user invites.
     - Churn : How many customers have uninstalled the application, or haven’t launched it in a certain time period.
     - Customer lifetime value : How much a user is worth from cradle to grave.
+- For mobile developers, the dynamics of an app store matter more than almost anything else when it comes to achieving significant traction.
+    - In 2012, the top 25 applications in the iPhone App Store accounted for roughly 15% of all revenue, and the rest of the top 100 accounted for roughly 17%.
+- ARPU(Average Revenue Per User) is simply the revenue you’ve made, divided by the number of active users or players you have.
+- If you inflate the number of active players to make yourself look good, you’ll reduce the ARPU, so this metric forces you to draw a realistic line in the sand about what “engaged” means.
+- For mobile games, you can measure customer lifetime value (CLV) by calculating the averages of the money spent by every player post-churn.
 
