@@ -330,4 +330,17 @@
 - ARPU(Average Revenue Per User) is simply the revenue you’ve made, divided by the number of active users or players you have.
 - If you inflate the number of active players to make yourself look good, you’ll reduce the ARPU, so this metric forces you to draw a realistic line in the sand about what “engaged” means.
 - For mobile games, you can measure customer lifetime value (CLV) by calculating the averages of the money spent by every player post-churn.
+- The company needs to increase download volumes, increase the engagement rate, maximize ARPU, minimize churn, and improve virality so customer acquisition costs go down.
+- You also need to be sophisticated in terms of what you market to users in-game: whales are more likely to make bigger in-app purchases, whereas users who haven’t bought anything yet should be offered something inexpensive to start.
+- Treat your paying users as a separate customer base and track their behavior, churn, and revenue separately from your nonpaying ones.
+- Track churn at 1 day, 1 week, and 1 month, because users leave at different times for different reasons.
+- Knowing when users churn gives you an indication of why they’re churning and what you can try in order to keep them longer.
 
+<img width="300" alt="Screen Shot 2022-06-10 at 10 11 11 PM" src="https://user-images.githubusercontent.com/73784742/173084370-34f0eb71-52ed-4e51-a65f-c29adc009564.png">
+
+- Game developers have to find ways to carefully integrate monetization, particularly when it doesn’t fit the theme of the game, and must measure the impact of these revenue sources on their players’ subsequent behavior.
+- Key Takeaways
+    - Mobile apps make their money in a variety of ways.
+    - Most of the money comes from a small number of users; these should be segmented and analyzed as a distinct group. The key metric is average revenue per user, but you may also track the average revenue per paying user, since these “whales” are so distinct.
+
+### CHAPTER 11 - Model Four:Media Site
