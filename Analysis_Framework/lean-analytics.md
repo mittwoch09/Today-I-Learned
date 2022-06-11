@@ -344,3 +344,5 @@
     - Most of the money comes from a small number of users; these should be segmented and analyzed as a distinct group. The key metric is average revenue per user, but you may also track the average revenue per paying user, since these “whales” are so distinct.
 
 ### CHAPTER 11 - Model Four:Media Site
+- If your business model most closely resembles a media site, then your primary focus is sharing advertisers’ messages with viewers, and getting paid for impressions, click-throughs, or sales.
+- Media sites care most of all about click-through or display rates, because those are actual revenue, but they also need to maximize the time visitors spend on the site, the number of pages they see, and the number of unique visitors (versus repeat visitors who keep coming back), because this represents inventory—chances to show ads to visitors—and a growing reach of new people in whom advertisers might be interested.
