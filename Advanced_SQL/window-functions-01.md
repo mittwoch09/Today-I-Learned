@@ -341,3 +341,128 @@ ORDER BY w.b;
 |q5         |3|X        |            8|
 |q6         |4|X        |           12|
 |q9         |7|X        |           19|
+
+### EXERCISE
+
+<img width="500" alt="Screen Shot 2022-06-13 at 4 35 18 PM" src="https://user-images.githubusercontent.com/73784742/173313545-0a934c09-b2b5-4365-b8ce-bb6ed58f5b13.png">
+
+```sql
+DROP TABLE IF EXISTS map;
+CREATE TABLE map (
+	x   int NOT NULL PRIMARY KEY,
+	alt int NOT NULL
+);
+
+@set p0 = 0
+
+INSERT INTO map(x, alt) VALUES
+	(  0, 200),
+	( 10, 200),
+	( 20, 200),
+	( 30, 300),
+	( 40, 400),
+	( 50, 400),
+	( 60, 400),
+	( 70, 200),
+	( 80, 400),
+	( 90, 700),
+	(100, 800),
+	(110, 700),
+	(120, 500);
+```
+
+```sql
+WITH
+-- Location (x and altitude) of observer p0
+p0(x, alt) AS (
+	SELECT :p0 AS x, m.alt
+	FROM   MAP AS m
+	WHERE  m.x = :p0
+),
+-- Angles from view point of p0 (facing right)
+angles(x, angle) AS (
+	SELECT m.x,
+		   degrees(atan((m.alt - p0.alt) / abs(p0.x - m.x))) AS angle
+    FROM   map AS m, p0
+    WHERE  m.x > p0.x
+),
+-- Max angle scan from p0
+max_scan(x, max_angle) AS (
+	SELECT a.x,
+		   MAX(a.angle) OVER (ORDER BY abs(p0.x - a.x)) AS max_angle
+	FROM   angles AS a, p0
+),
+-- Visibility from p0
+visibility(x, "visible?") AS (
+	SELECT m.x, a.angle >= m.max_angle AS "visible?"
+	FROM   angles AS a, max_scan AS m
+	WHERE  a.x = m.x
+)
+TABLE visibility
+ORDER BY x;
+```
+
+|x  |visible?|
+|---|--------|
+| 10|true    |
+| 20|true    |
+| 30|true    |
+| 40|true    |
+| 50|false   |
+| 60|false   |
+| 70|false   |
+| 80|false   |
+| 90|true    |
+|100|true    |
+|110|false   |
+|120|false   |
+
+<img width="500" alt="Screen Shot 2022-06-13 at 4 37 44 PM" src="https://user-images.githubusercontent.com/73784742/173313999-2dbe1be8-1493-4b81-a58a-a44eb5a00aca.png">
+
+```sql
+@set p0 = 90
+
+WITH
+-- Location (x and altitude) of observer p0
+p0(x, alt) AS (
+	SELECT :p0 AS x, m.alt
+	FROM   MAP AS m
+	WHERE  m.x = :p0
+),
+-- Angles from view point of p0 (facing left and right)
+angles(x, angle) AS (
+	SELECT m.x,
+		   degrees(atan((m.alt - p0.alt) / abs(p0.x - m.x))) AS angle
+    FROM   map AS m, p0
+    WHERE  m.x <> p0.x
+),
+-- Max angle scan from p0
+max_scan(x, max_angle) AS (
+	SELECT a.x,
+		   MAX(a.angle) OVER (PARTITION BY sign(p0.x - a.x) ORDER BY abs(p0.x - a.x)) AS max_angle
+	FROM   angles AS a, p0
+),
+-- Visibility from p0
+visibility(x, "visible?") AS (
+	SELECT m.x, a.angle >= m.max_angle AS "visible?"
+	FROM   angles AS a, max_scan AS m
+	WHERE  a.x = m.x
+)
+TABLE visibility
+ORDER BY x;
+```
+
+|x  |visible?|
+|---|--------|
+|  0|true    |
+| 10|true    |
+| 20|false   |
+| 30|true    |
+| 40|true    |
+| 50|true    |
+| 60|true    |
+| 70|true    |
+| 80|true    |
+|100|true    |
+|110|false   |
+|120|false   |
