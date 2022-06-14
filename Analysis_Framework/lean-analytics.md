@@ -346,3 +346,15 @@
 ### CHAPTER 11 - Model Four:Media Site
 - If your business model most closely resembles a media site, then your primary focus is sharing advertisers’ messages with viewers, and getting paid for impressions, click-throughs, or sales.
 - Media sites care most of all about click-through or display rates, because those are actual revenue, but they also need to maximize the time visitors spend on the site, the number of pages they see, and the number of unique visitors (versus repeat visitors who keep coming back), because this represents inventory—chances to show ads to visitors—and a growing reach of new people in whom advertisers might be interested.
+- Media sites involve a lot of math; sometimes they feel like they’re being designed by spreadsheets rather than editors. Many of the vanity metrics we’ve warned you about earlier are actually relevant to media sites, since those sites make money from popularity.
+- Media sites care about:
+    - Audience and churn
+        How many people visit the site and how loyal they are.
+    - Ad inventory
+        The number of impressions that can be monetized.
+    - Ad rates
+        Sometimes measured in cost per engagement—essentially how much a site can make from those impressions based on the content it covers and the people who visit.
+    - Click-through rates
+        How many of the impressions actually turn into money.
+    - Content/advertising balance
+        The balance of ad inventory rates and content that maximizes overall performance.
