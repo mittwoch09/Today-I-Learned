@@ -349,12 +349,29 @@
 - Media sites involve a lot of math; sometimes they feel like they’re being designed by spreadsheets rather than editors. Many of the vanity metrics we’ve warned you about earlier are actually relevant to media sites, since those sites make money from popularity.
 - Media sites care about:
     - Audience and churn
-        How many people visit the site and how loyal they are.
+        - How many people visit the site and how loyal they are.
+        - Measuring unique visitors can lead us astray if we focus on it too much; as we’ve noted earlier, engagement is much more important than traffic, so knowing how many visitors you’re losing, as well as adding, is critical.
     - Ad inventory
-        The number of impressions that can be monetized.
+        - The number of impressions that can be monetized.
+        - The actual inventory depends on page layout and how many advertising elements are on each page.
+        - One other factor to consider is the sessions-to-clicks ratio.
+        - For every 100 web searches that link to you and get clicked, roughly 95 will actually land on your site.
+        - The ratio of sessions (on your site) to clicks (from search links or referring links) is an indicator of web performance and reliability.
     - Ad rates
-        Sometimes measured in cost per engagement—essentially how much a site can make from those impressions based on the content it covers and the people who visit.
+        - Sometimes measured in cost per engagement—essentially how much a site can make from those impressions based on the content it covers and the people who visit.
+        - For a straight-up media site, the ad rate is driven by the topic of your site and the content you publish.
     - Click-through rates
-        How many of the impressions actually turn into money.
+        - How many of the impressions actually turn into money.
     - Content/advertising balance
-        The balance of ad inventory rates and content that maximizes overall performance.
+        - The balance of ad inventory rates and content that maximizes overall performance.
+        - The big decision any media site makes is how to pay the bills without selling out.
+        - First, ad space: too many ads leads to lousy content and reduced visitor loyalty. 
+        - Second, content: if your content is written to attract lucrative ad keywords, it’ll feel forced and seem like a paid promotion.
+        - If you’re serious about content, you need to test different layouts for revenue-versus-churn, and different copy for content-versus-ad-value.
+
+<img width="400" alt="Screen Shot 2022-06-15 at 5 42 25 PM" src="https://user-images.githubusercontent.com/73784742/173797189-008105b4-09da-4e74-b614-b02531a2745a.png">
+
+- Key takeaways
+    - For media sites, ad revenue is everything—but advertising may include displays, pay-per-view, pay-per-click, and affiliate models, so tracking revenues is complex.
+    - Media sites need inventory (in the form of visitor eyeballs) and desirability, which comes from content that attracts a demographic advertisers want.
+    - It’s hard to strike a balance between having good content and enough ads to pay the bills.
