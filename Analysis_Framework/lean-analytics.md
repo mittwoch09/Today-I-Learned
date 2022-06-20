@@ -1,4 +1,4 @@
-# Summary of the book "Lean Analytics: Use Data to Build a Better Startup Faster"
+# Lean Analytics: Use Data to Build a Better Startup Faster
 
 ## PART ONE: STOP LYING TO YOURSELF
 
@@ -163,7 +163,7 @@
 - Others, like the Engines of Growth and the Startup Growth Pyramid, offer strategies for knowing when or how to grow.
 - Some, like the Lean Canvas, help you map out the components of your business model so you can evaluate them independent of one another.
 
-### CHAPTER 6 : The Discipline of One Metric That Matters
+### CHAPTER 6 - The Discipline of One Metric That Matters
 - You might make your product sticky for Its core users, then use that to grow virally, and then use the user base to grow revenue. That’s focus.
 - Don’t let your ability to track so many things distract you. Capture everything, but focus on what’s important.
 - CASE STUDY : Moz Tracks Fewer KPIs to Increase Focus
@@ -375,3 +375,24 @@
     - For media sites, ad revenue is everything—but advertising may include displays, pay-per-view, pay-per-click, and affiliate models, so tracking revenues is complex.
     - Media sites need inventory (in the form of visitor eyeballs) and desirability, which comes from content that attracts a demographic advertisers want.
     - It’s hard to strike a balance between having good content and enough ads to pay the bills.
+
+### CHAPTER 12 -  Model Five:User-Generated Content
+
+- They deserve their own business model because their primary concern is the growth of an engaged community that creates content; without user activity, the sites stop functioning entirely.
+- Wikipedia is an example of a UGC site—good, reliable, well-referenced content helps the site
+- The tiers of engagement create a natural funnel, from the completely disengaged, fly-by visitors who come just once, to the hardcore.
+- One of the core functions of the site is to acquire one-time visitors and turn them into users with accounts, and ultimately, into collaborators.
+- A UGC company cares about several metrics:
+    - Number of engaged visitors
+        - How often people come back, and how long they stick around.
+    - Content creation
+        - The percentage of visitors who interact with content in some way, from creating it to voting on it.
+    - Engagement funnel changes
+        - How well the site moves people to more engaged levels of content over time.
+    - Value of created content
+        - The business benefit of content, from donations to media clicks.
+    - Content sharing and virality
+        - How content gets shared, and how this drives growth.
+    - Notification effectiveness
+        - The percentage of users who, when told something by push, email, or another means, act on it.
+
