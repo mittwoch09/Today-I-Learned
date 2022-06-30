@@ -215,3 +215,186 @@ TABLE measured;
 |Spy|      1|00:00:00|
 |Spy|      2|00:01:12|
 |Spy|      3|00:00:10|
+
+### FIRST_VALUE, LAST_VALUE, NTH_VALUE
+
+<img width="500" alt="Screen Shot 2022-06-30 at 1 45 21 PM" src="https://user-images.githubusercontent.com/73784742/176601713-2444894b-366b-4316-a153-835f37ae7b7a.png">
+
+<img width="500" alt="Screen Shot 2022-06-30 at 1 45 53 PM" src="https://user-images.githubusercontent.com/73784742/176601794-fef48ec7-5f0d-4803-b510-edde2a0f2c0b.png">
+
+```sql
+SELECT w.row                       AS "current row",
+       array_agg(w.row)   OVER win AS "rows in frame",
+       FIRST_VALUE(w.row) OVER win AS "first row",
+       LAST_VALUE(w.row)  OVER win AS "last row",
+       NTH_VALUE(w.row,2) OVER win AS "second row"
+FROM   W AS w
+WINDOW win AS (ORDER BY w.a ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING)
+ORDER BY w.a, w.row;
+```
+
+|current row|rows in frame   |first row|last row|second row|
+|-----------|----------------|---------|--------|----------|
+|q1         |{q1,q2,q3}      |q1       |q3      |q2        |
+|q2         |{q1,q2,q3,q4}   |q1       |q4      |q2        |
+|q3         |{q1,q2,q3,q4,q5}|q1       |q5      |q2        |
+|q4         |{q2,q3,q4,q5,q6}|q2       |q6      |q3        |
+|q5         |{q3,q4,q5,q6,q7}|q3       |q7      |q4        |
+|q6         |{q4,q5,q6,q7,q8}|q4       |q8      |q5        |
+|q7         |{q5,q6,q7,q8,q9}|q5       |q9      |q6        |
+|q8         |{q6,q7,q8,q9}   |q6       |q9      |q7        |
+|q9         |{q7,q8,q9}      |q7       |q9      |q8        |
+
+### EXERCISE
+
+<img width="500" alt="Screen Shot 2022-06-30 at 2 11 58 PM" src="https://user-images.githubusercontent.com/73784742/176605366-2dfd6c20-f047-4bf8-b85a-607357647f4d.png">
+
+<img width="500" alt="Screen Shot 2022-06-30 at 2 12 11 PM" src="https://user-images.githubusercontent.com/73784742/176605411-4f33fd05-fc03-4b2f-90ed-26c3c6665e5e.png">
+
+```sql
+DROP FUNCTION IF EXISTS slope(int,int,int,int);
+CREATE FUNCTION slope(s1 int, s2 int, s3 int, s4 int) RETURNS text AS
+$$
+  SELECT string_agg((array['↗','→','↘'])[signs.s + 2], '' ORDER by signs.pos)
+  FROM   unnest(array[s1,s2,s3,s4]) WITH ORDINALITY AS signs(s,pos)
+$$
+LANGUAGE SQL IMMUTABLE;
+```
+
+```sql
+WITH
+slopes(x, slope) AS (
+  SELECT m.x,
+         slope(sign(FIRST_VALUE(m.alt) OVER w - NTH_VALUE(m.alt,2) OVER w) :: int,
+               sign(NTH_VALUE(m.alt,2) OVER w - m.alt)                     :: int,
+               sign(m.alt                     - NTH_VALUE(m.alt,4) OVER w) :: int,
+               sign(NTH_VALUE(m.alt,4) OVER w - LAST_VALUE(m.alt) OVER w)  :: int)
+  FROM   map AS m                                                      --   ↑
+  WINDOW w AS (ORDER BY m.x ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING)  -- some sign() calls may yield NULL
+)
+SELECT s.x,
+       CASE WHEN s.slope SIMILAR TO '(↘↘|↘→|↗↘|→↘)(↗↗|↗→|↗↘|→↗)' THEN 'valley'
+            WHEN s.slope SIMILAR TO '(↗↗|↗→|↘↗|→↗)(↘↘|↘→|↘↗|→↘)' THEN 'peak'
+            ELSE '-'
+       END AS feature
+FROM   slopes AS s
+ORDER BY s.x;
+```
+
+|x  |feature|
+|---|-------|
+|  0|-      |
+| 10|-      |
+| 20|-      |
+| 30|-      |
+| 40|-      |
+| 50|peak   |
+| 60|-      |
+| 70|valley |
+| 80|-      |
+| 90|-      |
+|100|peak   |
+|110|-      |
+|120|-      |
+
+### Numbering and Ranking Rows
+
+<img width="500" alt="Screen Shot 2022-06-30 at 2 41 08 PM" src="https://user-images.githubusercontent.com/73784742/176609791-ac039cd2-dd09-4976-a683-d65bf5de8949.png">
+
+<img width="500" alt="Screen Shot 2022-06-30 at 2 41 51 PM" src="https://user-images.githubusercontent.com/73784742/176609938-b7383ff8-c173-43a5-91bc-7931f8526ca8.png">
+
+```sql
+SELECT w."row"               AS "current row",
+       w.a,
+       w.b,
+       ROW_NUMBER() OVER win AS "ROW_NUMBER",
+       DENSE_RANK() OVER win AS "DENSE_RANK",
+       RANK()       OVER win AS "RANK"
+FROM   W AS w
+WINDOW win AS (PARTITION BY w.b ORDER BY w.a)
+ORDER BY w.b, w.a;
+```
+
+|current row|a|b|ROW_NUMBER|DENSE_RANK|RANK|
+|-----------|-|-|----------|----------|----|
+|q1         |1|O|         1|         1|   1|
+|q4         |3|O|         2|         2|   2|
+|q8         |6|O|         3|         3|   3|
+|q7         |6|O|         4|         3|   3|
+|q2         |2|X|         1|         1|   1|
+|q5         |3|X|         2|         2|   2|
+|q3         |3|X|         3|         2|   2|
+|q6         |4|X|         4|         3|   4|
+|q9         |7|X|         5|         4|   5|
+
+```sql
+SELECT tallest.legs, tallest.species, tallest.height
+FROM   (SELECT d.legs, d.species, d.height,
+               RANK() OVER (PARTITION BY d.legs
+                            ORDER BY d.height DESC) AS rank
+        FROM   dinosaurs AS d
+        WHERE  d.legs IS NOT NULL) AS tallest(legs,species,height,rank)
+WHERE  tallest.rank <= 3
+ORDER BY tallest.legs, tallest.height;
+```
+
+|legs|species      |height|
+|----|-------------|------|
+|   2|Spinosaurus  |   2.4|
+|   2|Ceratosaurus |   4.0|
+|   2|Tyrannosaurus|   7.0|
+|   4|Diplodocus   |   3.6|
+|   4|Brachiosaurus|   7.6|
+|   4|Supersaurus  |  10.0|
+
+### EXERCISE
+
+<img width="500" alt="Screen Shot 2022-06-30 at 2 47 44 PM" src="https://user-images.githubusercontent.com/73784742/176610934-781ff2cd-f86d-4ed8-af2a-c1da5cf060e9.png">
+
+```sql
+DROP TABLE IF EXISTS citations;
+CREATE TABLE citations(ref int PRIMARY KEY);
+
+INSERT INTO citations VALUES
+  (5), (2), (14), (3), (1), (42), (6), (10), (7), (13);
+
+TABLE citations;
+```
+
+|ref|
+|---|
+|  5|
+|  2|
+| 14|
+|  3|
+|  1|
+| 42|
+|  6|
+| 10|
+|  7|
+| 13|
+
+```sql
+WITH ranges(ref, range) AS (
+  SELECT c.ref,
+         c.ref - ROW_NUMBER() OVER (ORDER BY c.ref) AS range
+    FROM citations AS c
+),
+output(range, first, last) AS (
+  SELECT r.range, MIN(r.ref) AS first, MAX(r.ref) AS last
+  FROM   ranges AS r
+  GROUP BY r.range
+)
+SELECT string_agg(CASE o.last - o.first
+                    WHEN 0 THEN o.first :: text
+                    WHEN 1 THEN o.first || '&' || o.last
+                    ELSE        o.first || '-' || o.last
+                  END,
+                  ','
+                  ORDER BY o.range) AS citations
+FROM   output AS o;
+```
+
+|citations          |
+|-------------------|
+|1-3,5-7,10,13&14,42|
