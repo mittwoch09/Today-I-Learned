@@ -4,7 +4,7 @@
 > 
 > -- by Haruki Murakami
 
-_38 TILs and counting..._
+_39 TILs and counting..._
 
 This is a collection of short articles about things I've learned. Inspired by [simonw](https://github.com/simonw/til)
 
@@ -16,6 +16,7 @@ This is a collection of short articles about things I've learned. Inspired by [s
 - [Non-Standard Data Types](Advanced_SQL/non-standard-data-types.md) - 2022.05.23
 - [Arrays and User-Defined Functions](Advanced_SQL/arrays-and-user-defined-functions.md) - 2022.06.02
 - [Window Functions 01](Advanced_SQL/window-functions-01.md) - 2022.06.06
+- [Window Functions 02](Advanced_SQL/window-functions-02.md) - 2022.06.30
 
 ### SQL for Data Analysis
 
