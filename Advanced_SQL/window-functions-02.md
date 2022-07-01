@@ -398,3 +398,80 @@ FROM   output AS o;
 |citations          |
 |-------------------|
 |1-3,5-7,10,13&14,42|
+
+<img width="500" alt="Screen Shot 2022-07-01 at 2 16 44 PM" src="https://user-images.githubusercontent.com/73784742/176835548-c992a70d-053e-43c9-9ab2-48381e4cf138.png">
+
+```sql
+SELECT w.row                   AS "current row",
+       w.a,
+       PERCENT_RANK() OVER win AS "PERCENT_RANK",
+       CUME_DIST()    OVER win AS "CUME_DIST",
+       NTILE(3)       OVER win AS "NTILE(3)"
+FROM   W AS w
+WINDOW win AS (ORDER BY w.a)
+ORDER BY w.a;
+```
+
+|current row|a|PERCENT_RANK|CUME_DIST         |NTILE(3)|
+|-----------|-|------------|------------------|--------|
+|q1         |1|         0.0|0.1111111111111111|       1|
+|q2         |2|       0.125|0.2222222222222222|       1|
+|q3         |3|        0.25|0.5555555555555556|       1|
+|q4         |3|        0.25|0.5555555555555556|       2|
+|q5         |3|        0.25|0.5555555555555556|       2|
+|q6         |4|       0.625|0.6666666666666666|       2|
+|q7         |6|        0.75|0.8888888888888888|       3|
+|q8         |6|        0.75|0.8888888888888888|       3|
+|q9         |7|         1.0|               1.0|       3|
+
+### EXERCISE
+
+<img width="500" alt="Screen Shot 2022-07-01 at 2 21 44 PM" src="https://user-images.githubusercontent.com/73784742/176836252-1e53bbea-72d6-4b8f-805d-ca6595d4d76f.png">
+
+```sql
+DROP TABLE IF EXISTS experiment;
+CREATE TABLE experiment (
+  t int PRIMARY KEY,
+  f float
+);
+
+@set N = 100
+
+@set segments = 5
+
+INSERT INTO experiment(t, f)
+  SELECT t, random() * 40 AS f
+  FROM   generate_series(0, :N-1) AS t;
+
+TABLE experiment;
+```
+
+```sql
+WITH
+tiles(tile, t, f) AS (
+  SELECT NTILE(:segments) OVER (ORDER BY e.t) AS tile, e.t, e.f
+  FROM   experiment AS e
+),
+segments(t0, t1, f0, f1) AS (
+  SELECT DISTINCT ON (t.tile) -- to prevent showing all partitions
+         FIRST_VALUE(t.t) OVER segment AS t0, LAST_VALUE(t.t) OVER segment AS t1,
+         FIRST_VALUE(t.f) OVER segment AS f0, LAST_VALUE(t.f) OVER segment AS f1
+  FROM   tiles AS t
+  WINDOW segment AS (PARTITION BY t.tile ORDER BY t.t ROWS BETWEEN UNBOUNDED PRECEDING
+                                                               AND UNBOUNDED FOLLOWING)
+)
+SELECT s.t0, s.t1, (s.f1 - s.f0) / (s.t1 - s.t0) AS m, s.f0 AS b
+FROM   segments AS s;
+```
+
+|t0|t1|m                   |b                 |
+|--|--|--------------------|------------------|
+| 0|19| -1.1098085975338428| 30.94152859670828|
+|20|39|-0.23897775720213513|22.656110408113364|
+|40|59|-0.25847593035979494|16.634270128197954|
+|60|79|-0.49428511221407984| 23.22585433891959|
+|80|99| -1.4040733736118152|36.544866584515034|
+
+### SUMMARY
+
+<img width="500" alt="Screen Shot 2022-07-01 at 2 31 55 PM" src="https://user-images.githubusercontent.com/73784742/176837573-ffbc1a51-1f63-4b7f-8af1-1c10a6b5242a.png">
