@@ -23,6 +23,7 @@ This is a collection of short articles about things I've learned. Inspired by [s
 - [Time Series Analysis](DataAnalysis/TimeSeriesAnalysis/time-series-analysis.ipynb) - 2022.04.19
 - [Cohort Analysis](DataAnalysis/CohortAnalysis/cohort-analysis.ipynb) - 2022.04.22
 - [Anomaly Detection](DataAnalysis/AnomalyDetection/anomaly-detection.ipynb) - 2022.04.25
+- [Experiment Analysis](DataAnalysis/ExperimentAnalysis/experiment-analysis.ipynb) - 2022.04.27
 
 ### Analysis Framework
 
